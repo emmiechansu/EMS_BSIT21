@@ -1,8 +1,10 @@
 package employee_management_system;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
 
 public class EmployeeDashboard extends JFrame implements ActionListener {
 
@@ -10,12 +12,14 @@ public class EmployeeDashboard extends JFrame implements ActionListener {
 
     JButton btnProfile, btnSubmitRequest, btnMyRequests, btnLogout;
 
-    JLabel lblTitle, lblWelcome;
-     
-    
-    String role;
+    JLabel lblTitle;
 
-    public EmployeeDashboard(String role) {
+    String username, role;
+
+    public EmployeeDashboard(String username, String role) {
+
+        this.username = username;
+        this.role = role;
 
         setTitle("Employee Dashboard");
         setSize(900, 500);
@@ -23,7 +27,6 @@ public class EmployeeDashboard extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        
         sidebar = new JPanel();
         sidebar.setLayout(null);
         sidebar.setBounds(0, 0, 220, 500);
@@ -51,21 +54,20 @@ public class EmployeeDashboard extends JFrame implements ActionListener {
         btnLogout.setBounds(20, 270, 180, 35);
         sidebar.add(btnLogout);
 
-       
         contentPanel = new JPanel();
         contentPanel.setLayout(null);
         contentPanel.setBounds(220, 0, 680, 500);
         contentPanel.setBackground(new Color(245, 245, 245));
 
-        lblTitle = new JLabel("Welcome Employee");
+        lblTitle = new JLabel("Welcome " + username);
         lblTitle.setFont(new Font("Arial", Font.BOLD, 24));
         lblTitle.setBounds(30, 20, 300, 40);
+
         contentPanel.add(lblTitle);
 
         add(sidebar);
         add(contentPanel);
 
-        
         btnProfile.addActionListener(this);
         btnSubmitRequest.addActionListener(this);
         btnMyRequests.addActionListener(this);
@@ -73,35 +75,57 @@ public class EmployeeDashboard extends JFrame implements ActionListener {
 
         setVisible(true);
     }
-   
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == btnProfile) {
-    
-    }else if (e.getSource() == btnSubmitRequest) {
 
-    contentPanel.removeAll();
+            contentPanel.removeAll();
 
-    SubmitReqForm form = new SubmitReqForm();
-    form.setBounds(0, 0, contentPanel.getWidth(), contentPanel.getHeight());
+            MyProfileView profile = new MyProfileView(username);
 
-    contentPanel.add(form);
+            profile.setBounds(0, 0,
+                    contentPanel.getWidth(),
+                    contentPanel.getHeight());
 
-    contentPanel.revalidate();
-    contentPanel.repaint();
-}else if (e.getSource() == btnMyRequests) {
+            contentPanel.add(profile);
 
-    contentPanel.removeAll();
+            contentPanel.revalidate();
+            contentPanel.repaint();
+        }
 
-    MyRequestView reqPanel = new MyRequestView();
-    reqPanel.setBounds(0, 0, contentPanel.getWidth(), contentPanel.getHeight());
+        else if (e.getSource() == btnSubmitRequest) {
 
-    contentPanel.add(reqPanel);
+            contentPanel.removeAll();
 
-    contentPanel.revalidate();
-    contentPanel.repaint();
-}
+            SubmitReqForm form = new SubmitReqForm();
+
+            form.setBounds(0, 0,
+                    contentPanel.getWidth(),
+                    contentPanel.getHeight());
+
+            contentPanel.add(form);
+
+            contentPanel.revalidate();
+            contentPanel.repaint();
+        }
+
+        else if (e.getSource() == btnMyRequests) {
+
+            contentPanel.removeAll();
+
+            MyRequestView reqPanel = new MyRequestView();
+
+            reqPanel.setBounds(0, 0,
+                    contentPanel.getWidth(),
+                    contentPanel.getHeight());
+
+            contentPanel.add(reqPanel);
+
+            contentPanel.revalidate();
+            contentPanel.repaint();
+        }
 
         else if (e.getSource() == btnLogout) {
 
@@ -110,3 +134,4 @@ public class EmployeeDashboard extends JFrame implements ActionListener {
         }
     }
 }
+
