@@ -1,99 +1,139 @@
 package manager;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 
-public class Manager_DB extends JFrame {
+public class Manager_DB extends JPanel {
 
-    JList<String> requestList;
+    JTable table;
 
-    public static DefaultListModel<String> requests =
-            new DefaultListModel<>();
+    DefaultTableModel tableModel;
 
-    public Manager_DB(){
+    JButton approveBtn,rejectBtn,refreshBtn;
 
-        setTitle("Manager Dashboard");
-        setSize(600,400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public Manager_DB() {
+
         setLayout(null);
 
-        JButton dashboardBtn = new JButton("Dashboard");
-        dashboardBtn.setBounds(20,30,120,30);
+        setBounds(0, 0, 700, 500);
 
-        JButton employeeBtn = new JButton("Employee List");
-        employeeBtn.setBounds(20,70,120,30);
+        JLabel lblTitle = new JLabel("Employee Requests");
 
-        JButton requestBtn = new JButton("Requests");
-        requestBtn.setBounds(20,110,120,30);
+        lblTitle.setBounds(250, 20, 200, 30);
 
-        JButton logoutBtn = new JButton("Logout");
-        logoutBtn.setBounds(20,150,120,30);
+        add(lblTitle);
 
-        add(dashboardBtn);
-        add(employeeBtn);
-        add(requestBtn);
-        add(logoutBtn);
+        
+        tableModel =new DefaultTableModel();
 
-        JLabel label = new JLabel("Employee Requests");
-        label.setBounds(200,20,200,30);
-        add(label);
+        tableModel.addColumn("Employee");
+        tableModel.addColumn("Type");
+        tableModel.addColumn("Date");
+        tableModel.addColumn("Amount");
+        tableModel.addColumn("Reason");
+        tableModel.addColumn("Status");
 
-        JLabel identifierlbl = new JLabel("Name | Type | Status");
-        identifierlbl.setBounds(200,50,350,30);
-        add(identifierlbl);
+        table =new JTable(tableModel);
 
-        requestList = new JList<>(requests);
+        JScrollPane scroll =new JScrollPane(table);
 
-        JScrollPane scroll = new JScrollPane(requestList);
-        scroll.setBounds(200,80,300,150);
+        scroll.setBounds(20, 70, 650, 250);
+
         add(scroll);
 
-        JButton approveBtn = new JButton("Approve");
-        approveBtn.setBounds(200,250,100,30);
+        approveBtn = new JButton("Approve");
 
-        approveBtn.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-
-                int index = requestList.getSelectedIndex();
-
-                if(index != -1){
-
-                    String updated = requests.get(index)
-                            .replace("Pending","Approved");
-
-                    requests.set(index, updated);
-
-                } else {
-                    JOptionPane.showMessageDialog(null,
-                            "Select an employee first.");
-                }
-            }
-        });
+        approveBtn.setBounds(150, 350, 120, 35);
 
         add(approveBtn);
 
-        JButton rejectBtn = new JButton("Reject");
-        rejectBtn.setBounds(320,250,100,30);
+        rejectBtn =new JButton("Reject");
 
-        rejectBtn.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
+        rejectBtn.setBounds(290, 350, 120, 35);
 
-                int index = requestList.getSelectedIndex();
+        add(rejectBtn);
 
-                if(index != -1){
+        refreshBtn =new JButton("Refresh");
 
-                    String updated = requests.get(index)
-                            .replace("Pending","Rejected");
+        refreshBtn.setBounds(430, 350,120, 35);
 
-                    requests.set(index, updated);
+        add(refreshBtn);
 
-                } else {
-                    JOptionPane.showMessageDialog(null,
-                            "Select an employee first.");
+        loadRequests();
+
+        approveBtn.addActionListener( new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int row = table.getSelectedRow();
+
+                if(row == -1) {
+
+                    JOptionPane.showMessageDialog( null, "Select Request First");
+
+                    return;
                 }
+
+                RequestData.requests.get(row).status= "Approved";
+
+                loadRequests();
+
+                JOptionPane.showMessageDialog(null,"Request Approved");
             }
         });
 
-        add(rejectBtn);
+        rejectBtn.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int row = table.getSelectedRow();
+
+                if(row == -1) {
+
+                    JOptionPane.showMessageDialog( null,"Select Request First");
+
+                    return;
+                }
+
+                RequestData.requests.get(row).status= "Rejected";
+
+                loadRequests();
+
+                JOptionPane.showMessageDialog( null, "Request Rejected" );
+            }
+        });
+
+        refreshBtn.addActionListener(
+                new ActionListener() {
+
+            @Override
+            public void actionPerformed(
+                    ActionEvent e) {
+
+                loadRequests();
+            }
+        });
+    }
+
+    public void loadRequests() {
+
+        tableModel.setRowCount(0);
+
+        for(Request req :
+                RequestData.requests) {
+
+            tableModel.addRow(new Object[] {
+
+                    req.employeeName,
+                    req.type,
+                    req.date,
+                    req.amount,
+                    req.reason,
+                    req.status
+            });
+        }
     }
 }
