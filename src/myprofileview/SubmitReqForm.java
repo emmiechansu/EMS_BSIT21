@@ -76,6 +76,7 @@ public class SubmitReqForm extends JFrame {
                 String name = txtName.getText();
                 String type = cmbType.getSelectedItem().toString();
 
+                if(name.isEmpty()){
 
                     JOptionPane.showMessageDialog(null,
                             "Please enter your name.");
