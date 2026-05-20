@@ -7,10 +7,8 @@ public class Manager_DB extends JFrame {
 
     JList<String> requestList;
 
-    String[] requests = {
-            "1 - Charles Ynares | Leave | Pending",
-            "2 - Matthew Fernandez | Expense | Pending"
-    };
+    public static DefaultListModel<String> requests =
+            new DefaultListModel<>();
 
     public Manager_DB(){
 
@@ -40,14 +38,14 @@ public class Manager_DB extends JFrame {
         label.setBounds(200,20,200,30);
         add(label);
 
-        JLabel identifierlbl = new JLabel("Employee ID | Name | Type | Status");
+        JLabel identifierlbl = new JLabel("Name | Type | Status");
         identifierlbl.setBounds(200,50,350,30);
         add(identifierlbl);
 
         requestList = new JList<>(requests);
 
         JScrollPane scroll = new JScrollPane(requestList);
-        scroll.setBounds(200,80,300,150); 
+        scroll.setBounds(200,80,300,150);
         add(scroll);
 
         JButton approveBtn = new JButton("Approve");
@@ -59,10 +57,15 @@ public class Manager_DB extends JFrame {
                 int index = requestList.getSelectedIndex();
 
                 if(index != -1){
-                    requests[index] = requests[index].replace("Pending","Approved");
-                    requestList.setListData(requests);
+
+                    String updated = requests.get(index)
+                            .replace("Pending","Approved");
+
+                    requests.set(index, updated);
+
                 } else {
-                    JOptionPane.showMessageDialog(null,"Select an employee first.");
+                    JOptionPane.showMessageDialog(null,
+                            "Select an employee first.");
                 }
             }
         });
@@ -78,10 +81,15 @@ public class Manager_DB extends JFrame {
                 int index = requestList.getSelectedIndex();
 
                 if(index != -1){
-                    requests[index] = requests[index].replace("Pending","Rejected");
-                    requestList.setListData(requests);
+
+                    String updated = requests.get(index)
+                            .replace("Pending","Rejected");
+
+                    requests.set(index, updated);
+
                 } else {
-                    JOptionPane.showMessageDialog(null,"Select an employee first.");
+                    JOptionPane.showMessageDialog(null,
+                            "Select an employee first.");
                 }
             }
         });
