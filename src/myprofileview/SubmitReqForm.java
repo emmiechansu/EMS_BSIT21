@@ -134,6 +134,6 @@ public class SubmitReqForm extends JFrame {
     }
 
     public static void main(String[] args) {
-       new SubmitReqForm().setVisible(true);
+       new SubmitReqForm().setVisible(true);        
     }
 }
