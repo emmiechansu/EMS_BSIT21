@@ -1,71 +1,139 @@
 package employee_management_system;
 
 import javax.swing.*;
-import java.awt.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 
 public class Manager_DB extends JPanel {
 
-    JList<String> requestList;
+    JTable table;
 
-    String[] requests = {
-            "1 - Charles Ynares | Leave | Pending",
-            "2 - Matthew Fernandez | Expense | Pending"
-    };
+    DefaultTableModel tableModel;
 
-    public Manager_DB(){
+    JButton approveBtn,rejectBtn,refreshBtn;
+
+    public Manager_DB() {
 
         setLayout(null);
-        setBackground(Color.WHITE);
 
-        JLabel label = new JLabel("Employee Requests");
-        label.setBounds(20,20,200,30);
-        add(label);
+        setBounds(0, 0, 700, 500);
 
-        JLabel identifierlbl = new JLabel("Employee ID | Name | Type | Status");
-        identifierlbl.setBounds(20,50,350,30);
-        add(identifierlbl);
+        JLabel lblTitle = new JLabel("Employee Requests");
 
-        requestList = new JList<>(requests);
+        lblTitle.setBounds(250, 20, 200, 30);
 
-        JScrollPane scroll = new JScrollPane(requestList);
-        scroll.setBounds(20,80,400,150); 
+        add(lblTitle);
+
+        
+        tableModel =new DefaultTableModel();
+
+        tableModel.addColumn("Employee");
+        tableModel.addColumn("Type");
+        tableModel.addColumn("Date");
+        tableModel.addColumn("Amount");
+        tableModel.addColumn("Reason");
+        tableModel.addColumn("Status");
+
+        table =new JTable(tableModel);
+
+        JScrollPane scroll =new JScrollPane(table);
+
+        scroll.setBounds(20, 70, 650, 250);
+
         add(scroll);
 
-        JButton approveBtn = new JButton("Approve");
-        approveBtn.setBounds(20,250,100,30);
+        approveBtn = new JButton("Approve");
+
+        approveBtn.setBounds(150, 350, 120, 35);
+
         add(approveBtn);
 
-        JButton rejectBtn = new JButton("Reject");
-        rejectBtn.setBounds(140,250,100,30);
+        rejectBtn =new JButton("Reject");
+
+        rejectBtn.setBounds(290, 350, 120, 35);
+
         add(rejectBtn);
 
-        approveBtn.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
+        refreshBtn =new JButton("Refresh");
 
-                int index = requestList.getSelectedIndex();
+        refreshBtn.setBounds(430, 350,120, 35);
 
-                if(index != -1){
-                    requests[index] = requests[index].replace("Pending","Approved");
-                    requestList.setListData(requests);
-                }else{
-                    JOptionPane.showMessageDialog(null,"Select an employee first.");
+        add(refreshBtn);
+
+        loadRequests();
+
+        approveBtn.addActionListener( new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int row = table.getSelectedRow();
+
+                if(row == -1) {
+
+                    JOptionPane.showMessageDialog( null, "Select Request First");
+
+                    return;
                 }
+
+                RequestData.requests.get(row).status= "Approved";
+
+                loadRequests();
+
+                JOptionPane.showMessageDialog(null,"Request Approved");
             }
         });
 
-        rejectBtn.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
+        rejectBtn.addActionListener(new ActionListener() {
 
-                int index = requestList.getSelectedIndex();
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-                if(index != -1){
-                    requests[index] = requests[index].replace("Pending","Rejected");
-                    requestList.setListData(requests);
-                }else{
-                    JOptionPane.showMessageDialog(null,"Select an employee first.");
+                int row = table.getSelectedRow();
+
+                if(row == -1) {
+
+                    JOptionPane.showMessageDialog( null,"Select Request First");
+
+                    return;
                 }
+
+                RequestData.requests.get(row).status= "Rejected";
+
+                loadRequests();
+
+                JOptionPane.showMessageDialog( null, "Request Rejected" );
             }
         });
+
+        refreshBtn.addActionListener(
+                new ActionListener() {
+
+            @Override
+            public void actionPerformed(
+                    ActionEvent e) {
+
+                loadRequests();
+            }
+        });
+    }
+
+    public void loadRequests() {
+
+        tableModel.setRowCount(0);
+
+        for(Request req :
+                RequestData.requests) {
+
+            tableModel.addRow(new Object[] {
+
+                    req.employeeName,
+                    req.type,
+                    req.date,
+                    req.amount,
+                    req.reason,
+                    req.status
+            });
+        }
     }
 }

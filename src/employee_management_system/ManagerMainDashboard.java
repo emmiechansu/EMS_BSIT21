@@ -87,22 +87,33 @@ public class ManagerMainDashboard extends JFrame implements ActionListener {
         
         if (e.getSource() == btnProfile) {
 
-            contentPanel.removeAll();
+                        contentPanel.removeAll();
 
-            
-            contentPanel.repaint();
-            contentPanel.revalidate();
+             EmployeeProfilePanel profile = new EmployeeProfilePanel();
+
+             profile.setBounds(0,0,contentPanel.getWidth(),contentPanel.getHeight());
+
+             contentPanel.add(profile);
+
+             contentPanel.repaint();
+
+             contentPanel.revalidate();
         }
 
         
         else if (e.getSource() == btnEmployees) {
 
-            contentPanel.removeAll();
+                            contentPanel.removeAll();
 
-            
+                EmployeeCredentialsPanel panel = new EmployeeCredentialsPanel();
 
-            contentPanel.repaint();
-            contentPanel.revalidate();
+                panel.setBounds(0, 0,contentPanel.getWidth(),contentPanel.getHeight());
+
+                contentPanel.add(panel);
+
+                contentPanel.repaint();
+
+                contentPanel.revalidate();
         }
 
        
@@ -119,14 +130,18 @@ public class ManagerMainDashboard extends JFrame implements ActionListener {
             contentPanel.revalidate();
         }
 
-        
         else if (e.getSource() == btnReports) {
 
             contentPanel.removeAll();
 
-            
+            ReportsPanel reportsPanel = new ReportsPanel();
+
+            reportsPanel.setBounds(0, 0, contentPanel.getWidth(), contentPanel.getHeight());
+
+            contentPanel.add(reportsPanel);
 
             contentPanel.repaint();
+
             contentPanel.revalidate();
         }
 

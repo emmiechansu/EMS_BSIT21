@@ -5,15 +5,22 @@
         <group>
             <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/Employee_Management_System.java</file>
             <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/Login.java</file>
-            <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/MainDashboard.java</file>
-            <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/HRDashboard.java</file>
+            <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/HRMainDashboard.java</file>
+            <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/EmployeesPanel.java</file>
             <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/Manager_DB.java</file>
             <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/MyRequestView.java</file>
             <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/SubmitReqForm.java</file>
             <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/RequestData.java</file>
             <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/Request.java</file>
             <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/EmployeeDashboard.java</file>
-            <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/MyProfileView.java</file>
+            <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/EmployeeProfilePanel.java</file>
+            <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/ManagerMainDashboard.java</file>
+            <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/AddEmployeePanel.java</file>
+            <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/Employee.java</file>
+            <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/EmployeeData.java</file>
+            <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/ReportsPanel.java</file>
+            <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/UserSession.java</file>
+            <file>file:/C:/Users/Chritian%20Jay%20Mangcao/Documents/NetBeansProjects/Employee_Management_System/src/employee_management_system/EmployeeCredentialsPanel.java</file>
         </group>
     </open-files>
 </project-private>

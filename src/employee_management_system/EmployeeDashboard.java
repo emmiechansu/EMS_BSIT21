@@ -79,21 +79,23 @@ public class EmployeeDashboard extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == btnProfile) {
+                if (e.getSource() == btnProfile) {
 
-            contentPanel.removeAll();
+                   contentPanel.removeAll();
 
-            MyProfileView profile = new MyProfileView(username);
+        EmployeeProfilePanel profile =
+                new EmployeeProfilePanel();
 
-            profile.setBounds(0, 0,
-                    contentPanel.getWidth(),
-                    contentPanel.getHeight());
+        profile.setBounds(0,0,
+                contentPanel.getWidth(),
+                contentPanel.getHeight());
 
-            contentPanel.add(profile);
+        contentPanel.add(profile);
 
-            contentPanel.revalidate();
-            contentPanel.repaint();
-        }
+        contentPanel.repaint();
+
+        contentPanel.revalidate();
+                }
 
         else if (e.getSource() == btnSubmitRequest) {
 
