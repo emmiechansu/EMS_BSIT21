@@ -19,7 +19,7 @@ public class ManagerMainDashboard extends JFrame implements ActionListener {
         
         this.role = role;
 
-        setTitle("Employee Dashboard");
+        setTitle("Manager Dashboard");
         setSize(900, 500);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,7 +62,7 @@ public class ManagerMainDashboard extends JFrame implements ActionListener {
         contentPanel.setBounds(200, 0, 700, 500);
         contentPanel.setBackground(Color.WHITE);
 
-        lblWelcome = new JLabel("Welcome Employee");
+        lblWelcome = new JLabel("Welcome Manager");
         lblWelcome.setBounds(20, 20, 300, 30);
         lblWelcome.setFont(new Font("Arial", Font.BOLD, 20));
 

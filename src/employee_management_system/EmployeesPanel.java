@@ -13,7 +13,12 @@ public class EmployeesPanel extends JPanel
 
     JButton refreshButton, updateButton, deleteButton;
 
-    JTextField idField, nameField, positionField;
+    JTextField idField,
+           nameField,
+           positionField,
+           departmentField,
+           contactField,
+           performanceField;
 
     public EmployeesPanel() {
 
@@ -30,7 +35,10 @@ public class EmployeesPanel extends JPanel
         tableModel.addColumn("ID");
         tableModel.addColumn("Name");
         tableModel.addColumn("Position");
-
+        tableModel.addColumn("Department");
+        tableModel.addColumn("Contact No");
+        tableModel.addColumn("Performance");
+        
         table = new JTable(tableModel);
 
         JScrollPane scrollPane =
@@ -45,14 +53,13 @@ public class EmployeesPanel extends JPanel
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                int selectedRow = table.getSelectedRow();
-
-                idField.setText(tableModel.getValueAt(selectedRow, 0).toString());
-
-                nameField.setText(tableModel.getValueAt(selectedRow, 1).toString());
-
-                positionField.setText(tableModel.getValueAt(selectedRow, 2).toString());
-            }
+               int selectedRow = table.getSelectedRow();
+               idField.setText(tableModel.getValueAt(selectedRow, 0).toString());
+               nameField.setText(tableModel.getValueAt(selectedRow, 1).toString());
+               positionField.setText(tableModel.getValueAt(selectedRow, 2).toString());
+               departmentField.setText(tableModel.getValueAt(selectedRow, 3).toString());
+               contactField.setText(tableModel.getValueAt(selectedRow, 4).toString());
+               performanceField.setText(tableModel.getValueAt(selectedRow, 5).toString());            }
         });
 
         JLabel lblId = new JLabel("ID:");
@@ -83,34 +90,48 @@ public class EmployeesPanel extends JPanel
         add(lblPosition);
 
         positionField = new JTextField();
-
         positionField.setBounds(540, 180,120, 25);
-
         add(positionField);
+        
+        JLabel lblDepartment = new JLabel("Department:");
+        lblDepartment.setBounds(470, 230, 80, 25);
+        add(lblDepartment);
+
+        departmentField = new JTextField();
+        departmentField.setBounds(540, 230, 120, 25);
+        add(departmentField);
+
+        JLabel lblContact = new JLabel("Contact:");
+        lblContact.setBounds(470, 280, 80, 25);
+        add(lblContact);
+
+        contactField = new JTextField();
+        contactField.setBounds(540, 280, 120, 25);
+        add(contactField);
+
+        JLabel lblPerformance = new JLabel("Performance:");
+        lblPerformance.setBounds(470, 330, 80, 25);
+        add(lblPerformance);
+
+        performanceField = new JTextField();
+        performanceField.setBounds(540, 330, 120, 25);
+        add(performanceField);
 
         refreshButton = new JButton("Refresh");
-
-        refreshButton.setBounds(40, 340,100, 30);
-
+        refreshButton.setBounds(40, 390,100, 30);
         add(refreshButton);
 
         updateButton = new JButton("Update");
-
-        updateButton.setBounds(180, 340,100, 30);
-
+        updateButton.setBounds(180, 390,100, 30);
         add(updateButton);
 
         deleteButton = new JButton("Delete");
-
-        deleteButton.setBounds(320, 340, 100, 30);
-
+        deleteButton.setBounds(320, 390, 100, 30);
         add(deleteButton);
 
 
         refreshButton.addActionListener(this);
-
         updateButton.addActionListener(this);
-
         deleteButton.addActionListener(this);
 
         loadEmployees();
@@ -123,11 +144,13 @@ public class EmployeesPanel extends JPanel
         for (Employee emp : EmployeeData.employees) {
 
             tableModel.addRow(new Object[]{
-                    emp.id,
-                    emp.name,
-                    emp.position
-            });
-        }
+            emp.id,
+            emp.name,
+            emp.position,
+            emp.department,
+            emp.contactNo,
+            emp.performance
+});        }
     }
 
     public void updateEmployee() {
@@ -148,13 +171,25 @@ public class EmployeesPanel extends JPanel
             String name =nameField.getText();
  
             String position = positionField.getText();
-
+            
+            String department = departmentField.getText();
+            
+            String contactNo = contactField.getText();
+            
+            String performance = performanceField.getText();
+            
             EmployeeData.employees.get(selectedRow).id = id;
 
             EmployeeData.employees.get(selectedRow).name = name;
 
             EmployeeData.employees.get(selectedRow).position = position;
-
+            
+            EmployeeData.employees.get(selectedRow).department = department;
+            
+            EmployeeData.employees.get(selectedRow).contactNo = contactNo;
+            
+            EmployeeData.employees.get(selectedRow).performance = performance;
+            
             loadEmployees();
 
             JOptionPane.showMessageDialog(this,"Employee Updated");
@@ -187,10 +222,13 @@ public class EmployeesPanel extends JPanel
 
     public void clearFields() {
 
-        idField.setText("");
-        nameField.setText("");
-        positionField.setText("");
-    }
+    idField.setText("");
+    nameField.setText("");
+    positionField.setText("");
+    departmentField.setText("");
+    contactField.setText("");
+    performanceField.setText("");
+}
 
     @Override
     public void actionPerformed(ActionEvent e) {

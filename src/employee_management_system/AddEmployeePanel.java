@@ -6,7 +6,12 @@ import java.awt.event.*;
 public class AddEmployeePanel extends JPanel
         implements ActionListener {
 
-    JTextField idField, nameField, positionField;
+    JTextField idField,
+            nameField,
+            positionField,
+            departmentField,
+            contactField,
+            performanceField;
 
     JButton addButton;
 
@@ -20,31 +25,55 @@ public class AddEmployeePanel extends JPanel
         add(lblTitle);
 
         JLabel lblId = new JLabel("ID:");
-        lblId.setBounds(180, 100, 100, 25);
+        lblId.setBounds(180, 80, 100, 25);
         add(lblId);
 
         idField = new JTextField();
-        idField.setBounds(280, 100, 180, 25);
+        idField.setBounds(280, 80, 180, 25);
         add(idField);
 
         JLabel lblName = new JLabel("Name:");
-        lblName.setBounds(180, 150, 100, 25);
+        lblName.setBounds(180, 120, 100, 25);
         add(lblName);
 
         nameField = new JTextField();
-        nameField.setBounds(280, 150, 180, 25);
+        nameField.setBounds(280, 120, 180, 25);
         add(nameField);
 
         JLabel lblPosition = new JLabel("Position:");
-        lblPosition.setBounds(180, 200, 100, 25);
+        lblPosition.setBounds(180, 160, 100, 25);
         add(lblPosition);
 
         positionField = new JTextField();
-        positionField.setBounds(280, 200, 180, 25);
+        positionField.setBounds(280, 160, 180, 25);
         add(positionField);
 
+        JLabel lblDepartment = new JLabel("Department:");
+        lblDepartment.setBounds(180, 200, 100, 25);
+        add(lblDepartment);
+
+        departmentField = new JTextField();
+        departmentField.setBounds(280, 200, 180, 25);
+        add(departmentField);
+
+        JLabel lblContact = new JLabel("Contact No:");
+        lblContact.setBounds(180, 240, 100, 25);
+        add(lblContact);
+
+        contactField = new JTextField();
+        contactField.setBounds(280, 240, 180, 25);
+        add(contactField);
+
+        JLabel lblPerformance = new JLabel("Performance:");
+        lblPerformance.setBounds(180, 280, 100, 25);
+        add(lblPerformance);
+
+        performanceField = new JTextField();
+        performanceField.setBounds(280, 280, 180, 25);
+        add(performanceField);
+
         addButton = new JButton("Add Employee");
-        addButton.setBounds(260, 270, 150, 30);
+        addButton.setBounds(260, 340, 150, 30);
         add(addButton);
 
         addButton.addActionListener(this);
@@ -54,25 +83,58 @@ public class AddEmployeePanel extends JPanel
 
         try {
 
+            if (idField.getText().isEmpty()
+                    || nameField.getText().isEmpty()
+                    || positionField.getText().isEmpty()
+                    || departmentField.getText().isEmpty()
+                    || contactField.getText().isEmpty()
+                    || performanceField.getText().isEmpty()) {
+
+                JOptionPane.showMessageDialog(this,
+                        "Please fill in all fields.");
+                return;
+            }
+
             int id = Integer.parseInt(idField.getText());
 
             String name = nameField.getText();
             String position = positionField.getText();
 
-            Employee emp =
-                    new Employee(id, name, position);
+            for (Employee emp : EmployeeData.employees) {
+
+                if (emp.getId() == id) {
+
+                    JOptionPane.showMessageDialog(this,
+                            "Employee ID already exists.");
+                    return;
+                }
+            }
+
+           String department = departmentField.getText();
+           String contactNo = contactField.getText();
+           String performance = performanceField.getText();
+
+        Employee emp =
+        new Employee(
+                id,
+                name,
+                position,
+                department,
+                contactNo,
+                performance
+        );
 
             EmployeeData.employees.add(emp);
 
             JOptionPane.showMessageDialog(this,
-                    "Employee Added");
+                    "Employee added successfully!");
 
             clearFields();
 
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(this,
-                    "Enter Valid Data");
+                    "ID must be a number.");
         }
     }
 
@@ -81,6 +143,9 @@ public class AddEmployeePanel extends JPanel
         idField.setText("");
         nameField.setText("");
         positionField.setText("");
+        departmentField.setText("");
+        contactField.setText("");
+        performanceField.setText("");
     }
 
     @Override
