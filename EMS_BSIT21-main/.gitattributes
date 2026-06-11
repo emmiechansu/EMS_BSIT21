@@ -1,7 +1,0 @@
-# Handle line endings automatically for text files
-* text=auto
-
-# Ensure Java source files use standard text matching
-*.java text
-*.xml text
-*.properties text
